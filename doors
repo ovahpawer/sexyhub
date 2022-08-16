@@ -1,135 +1,37 @@
-
-
-if game.CoreGui:FindFirstChild("dosage's solaris gui") and game.CoreGui:FindFirstChild("notiHolder") then
-    game.CoreGui:FindFirstChild("dosage's solaris gui"):Remove()
-    game.CoreGui:FindFirstChild("notiHolder"):Remove()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/ovahpawer/sexyhub/main/doors"))()
-else
-    local SolarisLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/Stebulous/solaris-ui-lib/main/source.lua"))()
-    --[[SolarisLib:New({
-      Name - Title of the UI <string>
-      FolderToSave - Name of the folder where the UI files will be stored <string>
-    })]]
-    local win = SolarisLib:New({
-      Name = "sexyman",
-      FolderToSave = "sexyman"
-    })
-    
-    --win:Tab(title <string>)
-    local tab = win:Tab("Main")
-    local tab2 = win:Tab("Visuals")
-    
-    --tab:Section(title <string>)
-    local sec = tab:Section("Main")
-    local sec2 = tab2:Section("Visuals")
-    
-    --sec:Button(title <string>, callback <function>)
-    sec2:Button("Button", function()
-      SolarisLib:Notification("HIDE!", "Ambush has spawned.")
-    end)
-    
-    --sec:Toggle(title <string>,default <boolean>, flag <string>, callback <function>)
-    local seemonster = sec2:Toggle("See Monster", false,"seemonster", function(t)
-        while t do
-            wait()
-            for _,object in pairs(game.Workspace.CurrentRooms:GetDescendants()) do
-                if object.Name == "FigureRagdoll" then
-                    local see = Instance.new("Highlight")
-                    if not object:FindFirstChild("Highlight") then
-                        see.Parent = object
-                        see.Enabled = true
-                        see.FillTransparency = 1
-                        see.OutlineTransparency = transparency
-                        see.OutlineColor = Color3.fromRGB(255,255,255)
-                    end
-                end
-            end
-        end
-    end)
-    
-    local seedoor = sec2:Toggle("See Door", false,"seedoor", function(t)
-        while t do
-            wait()
-            for _,object in pairs(game.Workspace.CurrentRooms:GetDescendants()) do
-                if object.Name == "Door" then
-                    local see = Instance.new("Highlight")
-                    if not object:FindFirstChild("Highlight") then
-                        see.Parent = object
-                        see.Enabled = true
-                        see.FillTransparency = 1
-                        see.OutlineTransparency = transparency
-                        see.OutlineColor = Color3.fromRGB(255,255,255)
-                    end
-                end
-            end
-        end
-    end)
-    
-    local seekey = sec2:Toggle("See Key", false,"seekey", function(t)
-        while t do
-            wait()
-            for _,object in pairs(game.Workspace.CurrentRooms:GetDescendants()) do
-                if object.Name == "FigureRagdoll" then
-                    local see = Instance.new("Highlight")
-                    if not object:FindFirstChild("Highlight") then
-                        see.Parent = object
-                        see.Enabled = true
-                        see.FillTransparency = 1
-                        see.OutlineTransparency = transparency
-                        see.OutlineColor = Color3.fromRGB(255,255,255)
-                    end
-                end
-            end
-        end
-    end)
-    
-    local seebook = sec2:Toggle("See Book", false,"seebook", function(t)
-        while t do
-            wait()
-            for _,object in pairs(game.Workspace.CurrentRooms:GetDescendants()) do
-                if object.Name == "LiveHintBook" then
-                    distance = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - object.Cover1.Position).magnitude
-                    if distance < 10 then
-                        if object:FindFirstChild("ActivateEventPrompt") then
-                            fireproximityprompt(object.ActivateEventPrompt)
-                        end
-                    end
-                    local part = Instance.new("Part")
-                    local see = Instance.new("Highlight")
-                    if not object:FindFirstChild("BOOK") then
-                        part.Name = "BOOK"
-                        part.Material = Enum.Material.Neon
-                        part.Parent = object
-                        part.Anchored = true
-                        part.CanCollide = false
-                        part.Size = Vector3.new(1.405, 0.249, 1.61)
-                        part.Position = object.Cover1.Position
-                        see.Parent = part
-                        see.Enabled = true
-                        see.FillTransparency = 1
-                        see.OutlineTransparency = transparency
-                        see.OutlineColor = Color3.fromRGB(255,255,255)
-                    end
-                end
-            end
-        end
-    end)
-    
-    local seelever = sec2:Toggle("See Lever", false,"seelever", function(t)
-        while t do
-            wait()
-            for _,object in pairs(game.Workspace.CurrentRooms:GetDescendants()) do
-                if object.Name == "LeverForGate" then
-                    distance = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - object.Main.Position).magnitude
-                    if distance < 10 then
-                        if object:FindFirstChild("ActivateEventPrompt") then
-                            fireproximityprompt(object.ActivateEventPrompt)
-                        end
-                    end
-                    if not object.Main:FindFirstChild("Highlight") then
+pcall(function ()
+    if not game.CoreGui:FindFirstChild("dosage's solaris gui") and game.CoreGui:FindFirstChild("notiHolder") then
+        local SolarisLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/Stebulous/solaris-ui-lib/main/source.lua"))()
+        --[[SolarisLib:New({
+          Name - Title of the UI <string>
+          FolderToSave - Name of the folder where the UI files will be stored <string>
+        })]]
+        local win = SolarisLib:New({
+          Name = "sexyman",
+          FolderToSave = "sexyman"
+        })
+        
+        --win:Tab(title <string>)
+        local tab = win:Tab("Main")
+        local tab2 = win:Tab("Visuals")
+        
+        --tab:Section(title <string>)
+        local sec = tab:Section("Main")
+        local sec2 = tab2:Section("Visuals")
+        
+        --sec:Button(title <string>, callback <function>)
+        sec2:Button("Button", function()
+          SolarisLib:Notification("HIDE!", "Ambush has spawned.")
+        end)
+        
+        --sec:Toggle(title <string>,default <boolean>, flag <string>, callback <function>)
+        local seemonster = sec2:Toggle("See Monster", false,"seemonster", function(t)
+            while t do
+                wait()
+                for _,object in pairs(game.Workspace.CurrentRooms:GetDescendants()) do
+                    if object.Name == "FigureRagdoll" then
                         local see = Instance.new("Highlight")
-                        if not object.Main:FindFirstChild("Highlight") then
-                            see.Parent = object.Main
+                        if not object:FindFirstChild("Highlight") then
+                            see.Parent = object
                             see.Enabled = true
                             see.FillTransparency = 1
                             see.OutlineTransparency = transparency
@@ -138,58 +40,108 @@ else
                     end
                 end
             end
-        end
-    end)
-    
-    --[[
-    toggle:Set(state <boolean>)
-    ]]
-    
-    --sec:Slider(title <string>,default <number>,max <number>,minimum <number>,increment <number>, flag <string>, callback <function>)
-    local slider = sec:Slider("Slider", 0,25,0,2.5,"Slider", function(t)
-      print(t)
-    end)
-    
-    --[[
-    slider:Set(state <number>)
-    ]]
-    
-    --sec:Dropdown(title <string>,options <table>,default <string>, flag <string>, callback <function>)
-    local dropdown = sec:Dropdown("Dropdown", {"a","b","c","d","e"},"","Dropdown", function(t)
-      print(t)
-    end)
-    
-    --[[
-    Dropdown:Refresh(options <table>, deletecurrent <boolean>)
-    Dropdown:Set(option <string>)
-    ]]
-    
-    --sec:MultiDropdown(title <string>,options <table>,default <table>, flag <string>, callback <function>)
-    local multidropdown =sec:MultiDropdown("Multi Dropdown", {"a","b","c","d","e"},{"b", "c"},"Dropdown", function(t)
-      print(table.concat(t, ", "))
-    end)
-    
-    --[[
-    Dropdown:Refresh(options <table>, deletecurrent <boolean>)
-    Dropdown:Set(option <table>)
-    ]]
-    
-    --sec:Colorpicker(title <string>, default <color3>, flag <string>, callback <function>)
-    sec:Colorpicker("Colorpicker", Color3.fromRGB(255,255,255),"Colorpicker", function(t)
-      print(t)
-    end)
-    
-    --sec:Textbox(title <string> ,disappear <boolean>, callback <function>)
-    sec:Textbox("Textbox", true, function(t)
-      print(t)
-    end)
-    
-    --sec:Bind(title <string>, default <keycode>, hold <boolean>, flag <string>, callback <function>)
-    sec:Bind("Hold Bind", Enum.KeyCode.E, true, "BindHold", function(t)
-      print(t)
-    end)
-    
-    sec:Bind("Normal Bind", Enum.KeyCode.F, false, "BindNormal", function()
-      print("Bind pressed")
-    end)
-end
+        end)
+        
+        local seedoor = sec2:Toggle("See Door", false,"seedoor", function(t)
+            while t do
+                wait()
+                for _,object in pairs(game.Workspace.CurrentRooms:GetDescendants()) do
+                    if object.Name == "Door" then
+                        local see = Instance.new("Highlight")
+                        if not object:FindFirstChild("Highlight") then
+                            see.Parent = object
+                            see.Enabled = true
+                            see.FillTransparency = 1
+                            see.OutlineTransparency = transparency
+                            see.OutlineColor = Color3.fromRGB(255,255,255)
+                        end
+                    end
+                end
+            end
+        end)
+        
+        local seekey = sec2:Toggle("See Key", false,"seekey", function(t)
+            while t do
+                wait()
+                for _,object in pairs(game.Workspace.CurrentRooms:GetDescendants()) do
+                    if object.Name == "FigureRagdoll" then
+                        local see = Instance.new("Highlight")
+                        if not object:FindFirstChild("Highlight") then
+                            see.Parent = object
+                            see.Enabled = true
+                            see.FillTransparency = 1
+                            see.OutlineTransparency = transparency
+                            see.OutlineColor = Color3.fromRGB(255,255,255)
+                        end
+                    end
+                end
+            end
+        end)
+        
+        local seebook = sec2:Toggle("See Book", false,"seebook", function(t)
+            while t do
+                wait()
+                for _,object in pairs(game.Workspace.CurrentRooms:GetDescendants()) do
+                    if object.Name == "LiveHintBook" then
+                        distance = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - object.Cover1.Position).magnitude
+                        if distance < 10 then
+                            if object:FindFirstChild("ActivateEventPrompt") then
+                                fireproximityprompt(object.ActivateEventPrompt)
+                            end
+                        end
+                        local part = Instance.new("Part")
+                        local see = Instance.new("Highlight")
+                        if not object:FindFirstChild("BOOK") then
+                            part.Name = "BOOK"
+                            part.Material = Enum.Material.Neon
+                            part.Parent = object
+                            part.Anchored = true
+                            part.CanCollide = false
+                            part.Size = Vector3.new(1.405, 0.249, 1.61)
+                            part.Position = object.Cover1.Position
+                            see.Parent = part
+                            see.Enabled = true
+                            see.FillTransparency = 1
+                            see.OutlineTransparency = transparency
+                            see.OutlineColor = Color3.fromRGB(255,255,255)
+                        end
+                    end
+                end
+            end
+        end)
+        
+        local seelever = sec2:Toggle("See Lever", false,"seelever", function(t)
+            while t do
+                wait()
+                for _,object in pairs(game.Workspace.CurrentRooms:GetDescendants()) do
+                    if object.Name == "LeverForGate" then
+                        distance = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - object.Main.Position).magnitude
+                        if distance < 10 then
+                            if object:FindFirstChild("ActivateEventPrompt") then
+                                fireproximityprompt(object.ActivateEventPrompt)
+                            end
+                        end
+                        if not object.Main:FindFirstChild("Highlight") then
+                            local see = Instance.new("Highlight")
+                            if not object.Main:FindFirstChild("Highlight") then
+                                see.Parent = object.Main
+                                see.Enabled = true
+                                see.FillTransparency = 1
+                                see.OutlineTransparency = transparency
+                                see.OutlineColor = Color3.fromRGB(255,255,255)
+                            end
+                        end
+                    end
+                end
+            end
+        end)
+        --sec:Slider(title <string>,default <number>,max <number>,minimum <number>,increment <number>, flag <string>, callback <function>)
+        local slider = sec:Slider("Slider", 16,100,0,1,"Slider", function(t)
+          print(t)
+        end)
+    else
+        game.CoreGui:FindFirstChild("dosage's solaris gui"):Remove()
+        game.CoreGui:FindFirstChild("notiHolder"):Remove()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/ovahpawer/sexyhub/main/doors"))()
+    end
+end)
