@@ -1,5 +1,9 @@
 pcall(function ()
-    if not game.CoreGui:FindFirstChild("dosage's solaris gui") and game.CoreGui:FindFirstChild("notiHolder") then
+    if game.CoreGui:FindFirstChild("dosage's solaris gui") and game.CoreGui:FindFirstChild("notiHolder") then
+        game.CoreGui:FindFirstChild("dosage's solaris gui"):Remove()
+        game.CoreGui:FindFirstChild("notiHolder"):Remove()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/ovahpawer/sexyhub/main/doors"))()
+    else
         local SolarisLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/Stebulous/solaris-ui-lib/main/source.lua"))()
         --[[SolarisLib:New({
           Name - Title of the UI <string>
@@ -139,9 +143,5 @@ pcall(function ()
         local slider = sec:Slider("Slider", 16,100,0,1,"Slider", function(t)
           print(t)
         end)
-    else
-        game.CoreGui:FindFirstChild("dosage's solaris gui"):Remove()
-        game.CoreGui:FindFirstChild("notiHolder"):Remove()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/ovahpawer/sexyhub/main/doors"))()
     end
 end)
