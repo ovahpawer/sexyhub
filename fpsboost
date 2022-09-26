@@ -96,7 +96,7 @@ end
 game:GetService("StarterGui"):SetCore("SendNotification", {
     Title = "fpsboosterlol",
     Text = "Loading FPS Booster...",
-    Duration = math.huge,
+    Duration = 5,
     Button1 = "Okay"
 })
 local Descendants = ReturnDescendants()
@@ -118,7 +118,7 @@ end
 game:GetService("StarterGui"):SetCore("SendNotification", {
     Title = "fpsboosterlol",
     Text = "FPS Booster Loaded!",
-    Duration = math.huge,
+    Duration = 5,
     Button1 = "Okay"
 })
 game.DescendantAdded:Connect(CheckIfBad)
