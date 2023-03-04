@@ -1,124 +1,72 @@
-local Players = game:GetService("Players")
-local BadInstances = {"DataModelMesh", "FaceInstance", "ParticleEmitter", "Trail", "Smoke", "Fire", "Sparkles", "PostEffect", "Explosion", "Clothing", "BasePart"}
-local CanBeEnabled = {"ParticleEmitter", "Trail", "Smoke", "Fire", "Sparkles", "PostEffect"}
-local function PartOfCharacter(Instance)
-    for i, v in pairs(Players:GetPlayers()) do
-        if v.Character and Instance:IsDescendantOf(v.Character) then
-            return true
-        end
-    end
-    return false
-end
-local function ReturnDescendants()
-    local Descendants = {}
-    WaitNumber = 5000
-    if _G.Settings.Players["Ignore Others"] then
-        for i, v in pairs(game:GetDescendants()) do
-            if not v:IsDescendantOf(Players) and not PartOfCharacter(v) then
-                for i2, v2 in pairs(BadInstances) do
-                    if v:IsA(v2) then
-                        table.insert(Descendants, v)
-                    end
-                end
-            end
-            if i == WaitNumber then
-                task.wait()
-                WaitNumber = WaitNumber + 5000
-            end
-        end
-    elseif _G.Settings.Players["Ignore Me"] then
-        for i, v in pairs(game:GetDescendants()) do
-            if not v:IsDescendantOf(Players) and not v:IsDescendantOf(ME.Character) then
-                for i2, v2 in pairs(BadInstances) do
-                    if v:IsA(v2) then
-                        table.insert(Descendants, v)
-                    end
-                end
-            end
-            if i == WaitNumber then
-                task.wait()
-                WaitNumber = WaitNumber + 5000
-            end
-        end
-    end
-    return Descendants
-end
-local function CheckIfBad(Instance)
-    if not Instance:IsDescendantOf(Players) and not PartOfCharacter(Instance) then
-        if Instance:IsA("DataModelMesh") then
-            if _G.Settings.Meshes.LowDetail then
-                sethiddenproperty(Instance, "LODX", Enum.LevelOfDetailSetting.Low)
-                sethiddenproperty(Instance, "LODY", Enum.LevelOfDetailSetting.Low)
-            elseif _G.Settings.Meshes.Destroy then
-                Instance:Destroy()
-            end
-        elseif Instance:IsA("FaceInstance") then
-            if _G.Settings.Images.Invisible then
-                Instance.Transparency = 1
-            elseif _G.Settings.Images.LowDetail then
-                Instance.Shiny = 1
-            elseif _G.Settings.Images.Destroy then
-                Instance:Destroy()
-            end
-        elseif table.find(CanBeEnabled, Instance.ClassName) then
-            if _G.Settings["No Particles"] or (_G.Settings.Other and _G.Settings.Other["No Particles"]) then
-                Instance.Enabled = false
-            end
-        elseif Instance:IsA("Explosion") then
-            if _G.Settings["No Explosions"] or (_G.Settings.Other and _G.Settings.Other["No Explosions"]) then
-                Instance.Visible = false
-            end
-        elseif Instance:IsA("Clothing") then
-            if _G.Settings["No Clothes"] or (_G.Settings.Other and _G.Settings.Other["No Clothes"]) then
-                Instance:Destroy()
-            end
-        elseif Instance:IsA("BasePart") then
-            if _G.Settings["Low Quality Parts"] or (_G.Settings.Other and _G.Settings.Other["Low Quality Parts"]) then
-                Instance.Material = Enum.Material.Plastic
-                Instance.Reflectance = 0
-            end
-        end
+local decalsyeeted = true -- Leaving this on makes games look shitty but the fps goes up by at least 20.
+local g = game
+local w = g.Workspace
+local l = g.Lighting
+local t = w.Terrain
+sethiddenproperty(l,"Technology",2)
+sethiddenproperty(t,"Decoration",false)
+t.WaterWaveSize = 0
+t.WaterWaveSpeed = 0
+t.WaterReflectance = 0
+t.WaterTransparency = 0
+l.GlobalShadows = 0
+l.FogEnd = 9e9
+l.Brightness = 0
+settings().Rendering.QualityLevel = "Level01"
+for i, v in pairs(w:GetDescendants()) do
+    if v:IsA("BasePart") and not v:IsA("MeshPart") then
+        v.Material = "Plastic"
+        v.Reflectance = 0
+    elseif (v:IsA("Decal") or v:IsA("Texture")) and decalsyeeted then
+        v.Transparency = 1
+    elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
+        v.Lifetime = NumberRange.new(0)
+    elseif v:IsA("Explosion") then
+        v.BlastPressure = 1
+        v.BlastRadius = 1
+    elseif v:IsA("Fire") or v:IsA("SpotLight") or v:IsA("Smoke") or v:IsA("Sparkles") then
+        v.Enabled = false
+    elseif v:IsA("MeshPart") and decalsyeeted then
+        v.Material = "Plastic"
+        v.Reflectance = 0
+        v.TextureID = 10385902758728957
+    elseif v:IsA("SpecialMesh") and decalsyeeted  then
+        v.TextureId=0
+    elseif v:IsA("ShirtGraphic") and decalsyeeted then
+        v.Graphic=0
+    elseif (v:IsA("Shirt") or v:IsA("Pants")) and decalsyeeted then
+        v[v.ClassName.."Template"]=0
     end
 end
-if _G.Settings["Low Water Graphics"] or (_G.Settings.Other and _G.Settings.Other["Low Water Graphics"]) then
-    workspace:FindFirstChildOfClass("Terrain").WaterWaveSize = 0
-    workspace:FindFirstChildOfClass("Terrain").WaterWaveSpeed = 0
-    workspace:FindFirstChildOfClass("Terrain").WaterReflectance = 0
-    workspace:FindFirstChildOfClass("Terrain").WaterTransparency = 0
-end
-if _G.Settings["No Shadows"] or (_G.Settings.Other and _G.Settings.Other["No Shadows"]) then
-    game:GetService("Lighting").GlobalShadows = false
-    game:GetService("Lighting").FogEnd = 9e9
-end
-if _G.Settings["Low Rendering"] or (_G.Settings.Other and _G.Settings.Other["Low Rendering"]) then
-    settings().Rendering.QualityLevel = 1
-end
-game:GetService("StarterGui"):SetCore("SendNotification", {
-    Title = "fpsboosterlol",
-    Text = "Loading FPS Booster...",
-    Duration = 5,
-    Button1 = "Okay"
-})
-local Descendants = ReturnDescendants()
-local WaitNumber = 500
-game:GetService("StarterGui"):SetCore("SendNotification", {
-    Title = "fpsboosterlol",
-    Text = "Checking " .. #Descendants .. " Instances...",
-    Duration = 5,
-    Button1 = "Okay"
-})
-for i, v in pairs(Descendants) do
-    CheckIfBad(v)
-    print("Loaded " .. i .. "/" .. #Descendants)
-    if i == WaitNumber then
-        task.wait()
-        WaitNumber = WaitNumber + 500
+for i = 1,#l:GetChildren() do
+    e=l:GetChildren()[i]
+    if e:IsA("BlurEffect") or e:IsA("SunRaysEffect") or e:IsA("ColorCorrectionEffect") or e:IsA("BloomEffect") or e:IsA("DepthOfFieldEffect") then
+        e.Enabled = false
     end
 end
-game:GetService("StarterGui"):SetCore("SendNotification", {
-    Title = "fpsboosterlol",
-    Text = "FPS Booster Loaded!",
-    Duration = 5,
-    Button1 = "Okay"
-})
-game.DescendantAdded:Connect(CheckIfBad)
+w.DescendantAdded:Connect(function(v)
+    wait()--prevent errors and shit
+   if v:IsA("BasePart") and not v:IsA("MeshPart") then
+        v.Material = "Plastic"
+        v.Reflectance = 0
+    elseif v:IsA("Decal") or v:IsA("Texture") and decalsyeeted then
+        v.Transparency = 1
+    elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
+        v.Lifetime = NumberRange.new(0)
+    elseif v:IsA("Explosion") then
+        v.BlastPressure = 1
+        v.BlastRadius = 1
+    elseif v:IsA("Fire") or v:IsA("SpotLight") or v:IsA("Smoke") or v:IsA("Sparkles") then
+        v.Enabled = false
+    elseif v:IsA("MeshPart") and decalsyeeted then
+        v.Material = "Plastic"
+        v.Reflectance = 0
+        v.TextureID = 10385902758728957
+    elseif v:IsA("SpecialMesh") and decalsyeeted then
+        v.TextureId=0
+    elseif v:IsA("ShirtGraphic") and decalsyeeted then
+        v.ShirtGraphic=0
+    elseif (v:IsA("Shirt") or v:IsA("Pants")) and decalsyeeted then
+        v[v.ClassName.."Template"]=0
+    end
+end)
