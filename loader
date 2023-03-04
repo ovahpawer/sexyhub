@@ -1,0 +1,5 @@
+repeat task.wait() until game:IsLoaded()
+
+if game.PlaceId == 8568266872 then
+loadstring(game:HttpGet('https://raw.githubusercontent.com/ovahpawer/sexyhub/main/Kill%20Monsters%20to%20Save%20Princess'))()
+end
