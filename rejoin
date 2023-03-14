@@ -1,6 +1,6 @@
 local teleportservice = game:GetService("TeleportService")
-local player = game:GetService("Players")
-local localplayer = player.LocalPlayer
+local players = game:GetService("Players")
+local localplayer = players.LocalPlayer
 if #players:GetPlayers() <= 1 then
     localplayer:Kick("\nRejoining...")
     wait()
