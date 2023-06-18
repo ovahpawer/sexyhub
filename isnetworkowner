@@ -37,5 +37,14 @@ env_add("isnetworkowner", function(p1)
     return false
 end, true)
 
+env_add("setsimulationradius", function(p1, p2)
+    assert(type(p1) == "number", "invalid argument #1 to '?' (number expected)", 2)
+    local A = setpropvalue
+    A(LocalPlayer, "SimulationRadius", p1)
+    if p2 then
+        A(LocalPlayer, "MaxSimulationRadius", p2)
+    end
+end, true)
+
 setscriptable(game.Players.LocalPlayer, "SimulationRadius", true)
 game.Players.LocalPlayer.SimulationRadius = math.huge * math.huge, math.huge * math.huge * 1 / 0 * 1 / 0 * 1 / 0 * 1 / 0 * 1 / 0
